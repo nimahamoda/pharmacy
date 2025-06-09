@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>صيدلية نعمة</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+<!-- مكتبة html5-qrcode -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="data.js"></script>
+
+<style>
+  .bg-navy{
+    background-color: #213555;
+  }
+  .text-navy{
+    color: #213555;
+  }
+  .bg-beige{
+    background-color: #F2EFE7;
+  }
+  .border-navy{
+    border:#21355555 1px solid;
+  }
+  .link{
+        text-decoration: none;
+
+  }
+.fixed {
+  position: sticky;
+  top: 0; /* ضروري حتى تشتغل sticky */
+  z-index: 100; /* للتأكد إنها فوق العناصر */
+}
+
+</style>
+</head>
+<body class="bg-light" >
+ <nav class="navbar bg-navy navbar-expand-lg  fixed " data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand mx-5 fw-bold fs-4" href="index.html">
+        <img src="icon.avif" class="rounded-pill" width="50px" alt="شعار الصيدلية" />
+        صيدلية نعمة
+      </a>
+
+      
+
+      <!-- أيقونة السلة مع العداد -->
+      <div class="position-relative me-3">
+        <a href="cart.html" class="text-white fs-4">
+          <i class="bi bi-cart3"></i>
+          <span
+            id="cart-count"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >0</span
+          >
+        </a>
+      </div>
+<button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-3 flex-lg-row flex-column">
+          <li class="nav-item"><a class="nav-link " aria-current="page" href="index.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link active" href="cart.html">سلة التسوق</a></li>
+          <li class="nav-item"><a class="nav-link " href="products.html"> المنتجات</a></li>
+
+         <li class="nav-item dropdown">
+
+        
+  <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    الأقسام
+  </a>
+  <ul id="dropdown-menu" class="dropdown-menu">
+    <!-- العناصر رح تنضاف تلقائيًا من JavaScript -->
+  </ul>
+</li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"> تواصل معنا</a></li>
+
+
+        </ul>
+
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+  <div class="container py-4">
+    <h1 id="category-title" class="text-center mb-4">منتجات النوع</h1>
+    <div id="product-container" class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3 justify-content-center"></div>
+  </div>
+  
+<section class="container  my-5">
+    <h2 class="text-center  mb-4 fw-bold">الأقسام</h2>
+
+    <div  id="category"class="row row-cols-2 row-cols-md-3 row-cols-lg-6 justify-content-center"> </div>
+    <div class="">
+    </div>
+        <h2 class="text-center  mb-4 fw-bold">
+      <a href="types.html" class="btn btn-warning btn-lg mt-4">تصفح جميع الاقسام</a>
+
+        </h2>
+
+       </section>
+
+  <script>
+    // استخراج معرف النوع من عنوان الرابط
+    const params = new URLSearchParams(window.location.search);
+    const categoryId = +params.get('categoryID');
+
+    const categoryObj = categories.find(cat => cat.id === categoryId);
+    const container = document.getElementById('product-container');
+    const title = document.getElementById('category-title');
+
+    let filteredProducts = [];
+
+    if (!categoryObj) {
+      title.textContent = "فئة غير موجودة";
+      container.innerHTML = `<p class="text-center text-muted fs-5">عذراً، لم يتم العثور على هذه الفئة.</p>`;
+    } else {
+      title.textContent = `منتجات النوع: ${categoryObj.name}`;
+      filteredProducts = products.filter(p => p.categoryId === categoryId);
+
+      if (filteredProducts.length === 0) {
+        container.innerHTML = `<p class="text-center text-muted fs-5">لا توجد منتجات في هذه الفئة</p>`;
+      } else {
+        container.innerHTML = '';
+        filteredProducts.forEach(p => {
+          const div = document.createElement('div');
+          div.className = "col";
+          div.innerHTML = `
+            <div class="product-card p-3 m-1 border text-center">
+          <a href="#" class="link">
+            <img src="${p.image}" alt="${p.name}" class="img-fluid rounded mb-3">
+          </a>
+          
+          <h3 class="h5 mb-1"><a href="#">${p.name}</a></h3>
+   <span class="text-danger">
+              <b>${p.price}</b>₪
+              </span>
+          <p class="mb-2 small">${p.desc}</p>
+          
+                        <p class="mb-0 center p-1">
+
+            <button class="add-to-cart link btn btn-sm btn-outline-dark" data-id="${p.id}">
+           
+            <i class="bi bi-cart-plus"></i> أضف إلى السلة
+             
+            </button>
+          </p>
+        </div>
+          `;
+          container.appendChild(div);
+        });
+      }
+    }
+
+    // نظام السلة باستخدام localStorage
+    let cartIt
+
+    // تحديث عداد السلة عند التحميل
+    updateCartCount();
+    
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js" ></script>
+
+
+</body>
+</html>

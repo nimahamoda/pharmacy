@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>صيدلية نعمة</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+<!-- مكتبة html5-qrcode -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script src="data.js"></script>
+
+<style>
+  .bg-navy{
+    background-color: #213555;
+  }
+  .text-navy{
+    color: #213555;
+  }
+  .bg-beige{
+    background-color: #F2EFE7;
+  }
+  .border-navy{
+    border:#21355555 1px solid;
+  }
+  .link{
+        text-decoration: none;
+
+  }
+.fixed {
+  position: sticky;
+  top: 0; /* ضروري حتى تشتغل sticky */
+  z-index: 100; /* للتأكد إنها فوق العناصر */
+}
+
+</style>
+</head>
+<body class="bg-light" >
+ <nav class="navbar bg-navy navbar-expand-lg  fixed " data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand mx-5 fw-bold fs-4" href="index.html">
+        <img src="icon.avif" class="rounded-pill" width="50px" alt="شعار الصيدلية" />
+        صيدلية نعمة
+      </a>
+
+      
+
+      <!-- أيقونة السلة مع العداد -->
+      <div class="position-relative me-3">
+        <a href="cart.html" class="text-white fs-4">
+          <i class="bi bi-cart3"></i>
+          <span
+            id="cart-count"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >0</span
+          >
+        </a>
+      </div>
+<button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0 d-flex gap-3 flex-lg-row flex-column">
+          <li class="nav-item"><a class="nav-link " aria-current="page" href="index.html">الرئيسية</a></li>
+          <li class="nav-item"><a class="nav-link active" href="cart.html">سلة التسوق</a></li>
+          <li class="nav-item"><a class="nav-link " href="products.html"> المنتجات</a></li>
+
+         <li class="nav-item dropdown">
+
+        
+  <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    الأقسام
+  </a>
+  <ul id="dropdown-menu" class="dropdown-menu">
+    <!-- العناصر رح تنضاف تلقائيًا من JavaScript -->
+  </ul>
+</li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"> تواصل معنا</a></li>
+
+
+        </ul>
+
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <h2 class="cart-header text-center">🛒 سلة المشتريات</h2>
+
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-secondary">
+          <tr>
+            <th>صورة</th>
+            <th>الاسم</th>
+            <th>السعر (₪)</th>
+            <th>الكمية</th>
+            <th>الإجمالي الجزئي (₪)</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody id="cart-table-body">
+          <!-- يتم ملء السلة هنا من خلال JavaScript -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2" class="text-end fw-bold">الإجمالي الكلي:</td>
+            <td colspan="2" class="fw-bold" id="cart-total">0 ₪</td>
+            <td colspan="2" class="fw-bold"><div class="text-center mt-3">
+<button id="clear-cart-btn" class="btn btn-danger">إفراغ السلة</button>
+</div>
+</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="text-center mt-4">
+      
+      <a href="index.html" class="btn btn-primary">
+        <i class="bi bi-arrow-right-circle"></i> متابعة التسوق
+      </a>
+    </div>
+  </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js" defer></script>
+
+
+</body>
+</html>
